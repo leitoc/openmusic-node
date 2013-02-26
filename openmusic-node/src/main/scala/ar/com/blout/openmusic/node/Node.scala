@@ -5,6 +5,7 @@ import ar.com.blout.openmusic.node.services.SongService
 import org.jboss.resteasy.spi.ResteasyDeployment
 import org.jboss.resteasy.plugins.server.netty.NettyJaxrsServer
 import java.util.Collections
+import ar.com.blout.openmusic.node.metadata.Metadata
 
 object Node {
 
@@ -13,7 +14,7 @@ object Node {
 
   def main(args: Array[String]): Unit = {
 
-    logger trace "Comienza el proceso"
+    logger info "Comienza el proceso"
     var deployment = new ResteasyDeployment
     deployment.setResourceClasses(Collections.singletonList(classOf[SongService].getName()))
 
@@ -21,7 +22,7 @@ object Node {
     netty setPort port
     netty setDeployment deployment
     netty start
-
+    
   }
 
 }
