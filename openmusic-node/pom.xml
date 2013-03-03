@@ -80,7 +80,22 @@
 			<version>2.0.M6-SNAP3</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- CONFIGURATION -->
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.beust</groupId>
+			<artifactId>jcommander</artifactId>
+			<version>1.30</version>
+		</dependency>
 	</dependencies>
+
+
 
 	<build>
 		<sourceDirectory>src/main/scala</sourceDirectory>

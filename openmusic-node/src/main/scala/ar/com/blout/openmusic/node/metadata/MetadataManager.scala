@@ -17,7 +17,7 @@ object MetadataManager {
 
   def all: java.util.Collection[Metadata] = {
 
-    return asJavaCollection(new File(Configuration.folder)
+    return asJavaCollection(new File(Configuration getString "folder")
       .listFiles()
       .filter({ elem => elem.isFile() })
       .map({ elem => this createMetadata elem })

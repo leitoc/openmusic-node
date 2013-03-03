@@ -1,10 +1,18 @@
 package ar.com.blout.openmusic.node.configuration
 
+import org.apache.commons.configuration.PropertiesConfiguration
+
 /**
- * Por ahora esta todo hardcodeado, es solo para probar
+ * Wrapper para la configuracion.
  */
 object Configuration {
 
-  var folder: String = "/Users/adrielrubenparedes/Music/music"
+  var configuration: PropertiesConfiguration = _
+
+  def config(configurationPath: String) = configuration = new PropertiesConfiguration(configurationPath)
+
+  def getInt(option: String): Int = configuration getInt option
+
+  def getString(option: String): String = configuration getString option
 
 }
