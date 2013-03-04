@@ -80,6 +80,12 @@
 			<version>2.0.M6-SNAP3</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.specs2</groupId>
+			<artifactId>specs2_${scala.version}</artifactId>
+			<version>1.12.3</version>
+			<scope>test</scope>
+		</dependency>
 
 		<!-- CONFIGURATION -->
 		<dependency>
