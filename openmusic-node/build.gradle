@@ -1,0 +1,42 @@
+apply plugin: 'scala'
+apply plugin: 'eclipse'
+apply plugin:'application'
+
+def scalaVersion = '2.10.0'
+def resteasyVersion = '3.0-beta-3'
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+mainClassName = 'ar.com.blout.openmusic.node.Node'
+
+version = '0.1.0-SNAPSHOT'
+
+repositories{
+
+
+    mavenCentral()
+    maven {
+        url "https://repository.jboss.org/nexus/content/groups/public/"
+    }
+}
+
+dependencies {
+
+    compile "org.scala-lang:scala-library:${scalaVersion}"
+    compile "org.jboss.resteasy:resteasy-netty:${resteasyVersion}"
+    compile "org.jboss.resteasy:resteasy-jaxrs:${resteasyVersion}"
+    compile "org.jboss.resteasy:resteasy-jaxb-provider:${resteasyVersion}"
+    compile "com.google.code.gson:gson:2.2.2"
+    compile "com.google.guava:guava:14.0-rc3"
+    compile "org.apache.logging.log4j:log4j-core:2.0-beta4"
+    compile "commons-configuration:commons-configuration:1.9"
+    compile "com.beust:jcommander:1.30"
+    testCompile "org.specs2:specs2_2.10:1.12.3"
+}
+
+
+jar {
+       from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+          manifest { attributes 'Main-Class': 'ar.com.blout.openmusic.node.Node' }
+}
