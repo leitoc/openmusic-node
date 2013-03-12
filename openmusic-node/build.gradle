@@ -33,6 +33,7 @@ dependencies {
     compile "commons-configuration:commons-configuration:1.9"
     compile "com.beust:jcommander:1.30"
     testCompile "org.specs2:specs2_2.10:1.12.3"
+    testCompile "junit:junit:4.11"
 }
 
 

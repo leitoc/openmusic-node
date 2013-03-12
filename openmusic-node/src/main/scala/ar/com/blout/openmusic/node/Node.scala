@@ -19,6 +19,7 @@ object Node {
 
     logger info "Comienza el proceso"
     configure(args)
+    logger.info(Configuration getString "folder")
     netty(Configuration getInt "port", deployment) start
 
   }
