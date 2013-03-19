@@ -1,6 +1,6 @@
 /*Copyright (c) 2013 -  SideEffectIdeas 
 *
-*	Module: openmusic - configuration
+*	Module: test - openmusic - services
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -20,23 +20,20 @@
 */
 
 
-package ar.com.blout.openmusic.node.configuration
+package ar.com.blout.openmusic.node.services
 
-import org.apache.commons.configuration.PropertiesConfiguration
-
-/**
- * Wrapper para la configuracion.
- */
-object Configuration {
-
-  var configuration: PropertiesConfiguration = _
-
-  def config(configurationPath: String) = configuration = new PropertiesConfiguration(configurationPath)
-
-  def getInt(option: String): Int = configuration getInt option
-
-  def getString(option: String): String = configuration getString option
+import org.specs2.mutable.Specification
+import org.specs2.mutable._
+import org.specs2.matcher.ShouldMatchers
+import ar.com.blout.openmusic.node.metadata.MetadataManager
 
 
+class SongServiceTest extends Specification  {
+  
+  "List all media files" should {
+    "get files in folder and subfolders" in {
+    	MetadataManager.all.size must not be equalTo(0)
+    }
+  }
 
 }
