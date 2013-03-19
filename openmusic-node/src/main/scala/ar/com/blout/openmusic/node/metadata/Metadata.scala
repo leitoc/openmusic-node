@@ -2,10 +2,10 @@ package ar.com.blout.openmusic.node.metadata
 
 import java.io.File
 import ar.com.blout.openmusic.node.configuration.Configuration
-import ar.com.blout.openmusic.node.playlist.M3U
+import ar.com.blout.openmusic.node.playlist.M3UElement
 import com.google.gson.annotations.Expose
 
-class Metadata extends M3U {
+class Metadata extends M3UElement {
 
   var nombre: String = _
   var autor: String = _

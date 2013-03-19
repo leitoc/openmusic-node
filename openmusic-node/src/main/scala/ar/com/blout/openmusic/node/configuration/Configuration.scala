@@ -15,4 +15,6 @@ object Configuration {
 
   def getString(option: String): String = configuration getString option
 
+
+
 }
