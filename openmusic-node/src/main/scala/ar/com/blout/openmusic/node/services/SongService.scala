@@ -12,29 +12,21 @@ import com.google.gson.GsonBuilder
 import javax.ws.rs.PathParam
 
 @Path("/openmusic/music")
-class SongService {
-
-  def json = new GsonBuilder().setPrettyPrinting().create();
+class SongService extends Jsonable {
 
   @GET
   @Path("/song/{id}/metadata")
   @Produces(Array("application/json"))
-  def songMetadata(@PathParam("id") id: Int): String = {
-    return json toJson MetadataManager.find(id)
-  }
+  def songMetadata(@PathParam("id") id: Int): String = MetadataManager.find(id)
 
   @GET
   @Path("list")
   @Produces(Array("application/json"))
-  def list: String = {
-    return json.toJson(MetadataManager.all)
-  }
+  def list: String = MetadataManager.all
 
   @GET
   @Path("/song/{id}")
   @Produces(Array("audio/mpeg"))
-  def song(@PathParam("id") id: Int): File = {
-    return MetadataManager.find(id).retrieve
-  }
+  def song(@PathParam("id") id: Int): File = MetadataManager.find(id).retrieve
 
 }
