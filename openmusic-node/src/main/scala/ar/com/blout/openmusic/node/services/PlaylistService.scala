@@ -42,7 +42,7 @@ class PlaylistService extends Jsonable {
 
   @GET
   @Path("/{id}")
-  @Produces(Array("audio/mpeg"))
+  @Produces(Array("audio/x-mpegurl"))
   def song(@PathParam("id") id: String): File =
     PlaylistManager.find(id) match {
       case Some(x) => x.retrieve
@@ -51,7 +51,7 @@ class PlaylistService extends Jsonable {
 
   @GET
   @Path("/{id}/info")
-  @Produces(Array("audio/mpeg"))
+  @Produces(Array("application/json"))
   def info(@PathParam("id") id: String): String =
     PlaylistManager.find(id) match {
       case Some(x) => x
@@ -66,8 +66,7 @@ class PlaylistService extends Jsonable {
   @GET
   @Path("/{id}/add/{metadata}")
   @Produces(Array("audio/mpeg"))
-  def add(@PathParam("id") id: String, @PathParam("metadata") metadata: Int) = {
-
+  def add(@PathParam("id") id: String, @PathParam("metadata") metadata: Int) =
     PlaylistManager.find(id) match {
       case Some(x) =>
         {
@@ -77,7 +76,5 @@ class PlaylistService extends Jsonable {
         var playlist = x
       case None => throw new RuntimeException
     }
-
-  }
 
 }
