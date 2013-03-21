@@ -24,6 +24,7 @@
 apply plugin: 'scala'
 apply plugin: 'eclipse'
 apply plugin:'application'
+apply plugin: 'idea'
 
 def scalaVersion = '2.10.0'
 def resteasyVersion = '3.0-beta-3'
@@ -35,12 +36,15 @@ mainClassName = 'ar.com.blout.openmusic.node.Node'
 
 version = '0.1.0-SNAPSHOT'
 
+ext.embedMongoVersion = '1.26'
+
 repositories{
 
 
     mavenCentral()
     maven {
         url "https://repository.jboss.org/nexus/content/groups/public/"
+        url "http://repo.springsource.org/release"
     }
 }
 
@@ -55,6 +59,7 @@ dependencies {
     compile "org.apache.logging.log4j:log4j-core:2.0-beta4"
     compile "commons-configuration:commons-configuration:1.9"
     compile "com.beust:jcommander:1.30"
+    compile "de.flapdoodle.embed:de.flapdoodle.embed.mongo:${embedMongoVersion}"
     testCompile "org.specs2:specs2_2.10:1.12.3"
     testCompile "junit:junit:4.11"
 }
