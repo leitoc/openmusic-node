@@ -19,7 +19,6 @@
 *   Mailing list: http://groups.google.com/group/sideEffectIdeas
 */
 
-
 package ar.com.sideeffect.openmusic.node.test
 
 import org.specs2.mutable.Specification
@@ -30,11 +29,21 @@ import org.junit.runner.RunWith
 import org.specs2.runner.JUnitRunner
 import ar.com.blout.openmusic.node.configuration.Configuration
 import ar.com.blout.openmusic.node.playlist.Playlist
+import ar.com.blout.openmusic.node.playlist.PlaylistManager
 
 @RunWith(classOf[JUnitRunner])
 class PlaylistTest extends Specification {
 
   var port: Int = _
+
+  def createMetadata(author: String, path: String, nombre: String) = {
+    var metadata = new Metadata
+    metadata.autor = author
+    metadata.path = path
+    metadata.nombre = nombre
+    metadata.uuid = metadata.path.hashCode()
+    metadata
+  }
 
   case class UserContext extends Before {
     def before = {
@@ -48,12 +57,7 @@ class PlaylistTest extends Specification {
   "Song metadata" should {
     "be transformed into M3U line" in new UserContext {
 
-      var metadata = new Metadata
-      metadata.autor = "Mago de Oz"
-      metadata.path = "/algun/path/loco/desde-mi-cielo.mp3"
-      metadata.nombre = "Desde mi cielo"
-      metadata.uuid = metadata.path.hashCode()
-
+      var metadata = createMetadata("Mago de Oz", "/algun/path/loco/desde-mi-cielo.mp3", "Desde mi cielo")
       var result = metadata.toM3u
 
       //Primero se ira por el camino de no especificar 
@@ -70,21 +74,12 @@ class PlaylistTest extends Specification {
 
       //refactorizar aca para sacar el repetido
       //con respecto al test anterior
-      var metadata = new Metadata
-      metadata.autor = "Mago de Oz"
-      metadata.path = "/algun/path/loco/desde-mi-cielo.mp3"
-      metadata.nombre = "Desde mi cielo"
-      metadata.uuid = metadata.path.hashCode()
-
-      var metadata2 = new Metadata
-      metadata2.autor = "Mago de Oz"
-      metadata2.path = "/algun/path/loco/desde-mi-cielo2.mp3"
-      metadata2.nombre = "Desde mi cielo2"
-      metadata2.uuid = metadata2.path.hashCode()
+      var metadata = createMetadata("Mago de Oz", "/algun/path/loco/desde-mi-cielo.mp3", "Desde mi cielo")
+      var metadata2 = createMetadata("Mago de Oz", "/algun/path/loco/desde-mi-cielo2.mp3", "Desde mi cielo2")
 
       var playlist = new Playlist
-      playlist add metadata
-      playlist add metadata2
+      metadata addTo playlist
+      metadata2 addTo playlist
 
       var result = playlist.toM3U
 

@@ -19,13 +19,13 @@
 *   Mailing list: http://groups.google.com/group/sideEffectIdeas
 */
 
-
 package ar.com.blout.openmusic.node.metadata
 
 import java.io.File
 import ar.com.blout.openmusic.node.configuration.Configuration
 import ar.com.blout.openmusic.node.playlist.M3UElement
 import com.google.gson.annotations.Expose
+import ar.com.blout.openmusic.node.playlist.Playlist
 
 class Metadata extends M3UElement {
 
@@ -39,6 +39,7 @@ class Metadata extends M3UElement {
    * Se encarga de obtener ese archivo de media y devolverlo para poder ser consumido
    */
   def retrieve: File = new File(path)
+  def addTo(playlist: Playlist) = playlist add this
 
   // M3U implementation
   def duration = "-1"

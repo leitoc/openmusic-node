@@ -31,6 +31,10 @@ import com.beust.jcommander.JCommander
 import ar.com.blout.openmusic.node.configuration.CLIParameters
 import ar.com.blout.openmusic.node.configuration.CLIParameters
 import ar.com.blout.openmusic.node.configuration.Configuration
+import ar.com.blout.openmusic.node.services.PlaylistService
+import scala.collection.JavaConverters
+import ar.com.blout.openmusic.node.services.SongService
+import ar.com.blout.openmusic.node.services.PlaylistService
 
 object Node {
 
@@ -64,7 +68,9 @@ object Node {
    */
   def deployment: ResteasyDeployment = {
     var deployment = new ResteasyDeployment()
-    deployment.setResourceClasses(Collections.singletonList(classOf[SongService].getName()))
+    var services = List(classOf[SongService], classOf[PlaylistService])
+    var servicesNames = services map { elem => elem.getName }
+    deployment.setResourceClasses(JavaConverters.asJavaListConverter(servicesNames).asJava)
     return deployment
   }
 
