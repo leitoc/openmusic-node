@@ -19,14 +19,11 @@
 *   Mailing list: http://groups.google.com/group/sideEffectIdeas
 */
 
-
 package ar.com.blout.openmusic.node.metadata
 
 import java.util.Arrays
 import com.google.common.io.Files
 import java.io.File
-import scala.collection.JavaConversions._
-import scala.collection.mutable.ListBuffer
 import java.security.MessageDigest
 import java.util.UUID
 import scala.collection.immutable.StringOps
@@ -40,13 +37,13 @@ object MetadataManager {
 
   var logger = LogManager.getLogger(this.getClass())
 
-  def all: java.util.Collection[Metadata] = {
+  def all: List[Metadata] = {
 
-    return asJavaCollection(new File(Configuration getString "folder")
+    return new File(Configuration getString "folder")
       .listFiles()
       .filter({ elem => elem.isFile() })
       .map({ elem => this createMetadata elem })
-      .toList)
+      .toList
 
   }
 

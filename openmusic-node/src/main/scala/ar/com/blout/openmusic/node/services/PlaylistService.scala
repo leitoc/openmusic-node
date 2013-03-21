@@ -31,6 +31,8 @@ import scala.collection.JavaConversions._
 import javax.ws.rs.POST
 import ar.com.blout.openmusic.node.metadata.MetadataManager
 import ar.com.blout.openmusic.node.playlist.Playlist
+import ar.com.blout.openmusic.node.utils.JavaConvertions
+import ar.com.blout.openmusic.node.utils.JavaConvertions
 
 @Path("/openmusic/playlist")
 class PlaylistService extends Jsonable {

@@ -22,8 +22,15 @@
 package ar.com.blout.openmusic.node.services
 
 import com.google.gson.GsonBuilder
+import java.util.Collection
+
+import scala.collection.JavaConversions._
+import scala.collection.mutable.ListBuffer
+import java.util.Collection
 
 trait Jsonable {
+
+  implicit def ListToJson[T](list: List[T]): String = this.toJson(asJavaCollection(list))
 
   implicit def AnythingToJson(obj: Any): String = this toJson obj
 
