@@ -19,22 +19,17 @@
 *   Mailing list: http://groups.google.com/group/sideEffectIdeas
 */
 
-
 package ar.com.blout.openmusic.node.services
 
-import org.specs2.mutable._
-import org.specs2.runner.JUnitRunner
-import org.junit.runner.RunWith
-import ar.com.blout.openmusic.node.metadata.MetadataManager
+import ar.com.blout.openmusic.node.configuration.Configuration
 
-@RunWith(classOf[JUnitRunner])
-class SongServiceTest extends Specification  {
-  
-  "List all media files" should {
-    "get files in folder and subfolders" in {
-    	FakeApplication.run
-    	MetadataManager.all.size must not be equalTo(0)
-    }
+/**
+ * Mock for the main process. Simulates a running Node process, but can be used when offline.
+ */
+
+object FakeApplication {
+  def run = {
+    Configuration config "testConfiguration.properties" 
+    //load folder
   }
-
 }
