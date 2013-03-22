@@ -21,8 +21,7 @@
 
 package ar.com.sideeffect.openmusic.node.test
 
-import org.specs2.mutable.Specification
-import org.specs2.matcher.ShouldMatchers
+
 import org.specs2.mutable._
 import ar.com.blout.openmusic.node.metadata.Metadata
 import org.junit.runner.RunWith
@@ -37,7 +36,7 @@ class PlaylistTest extends Specification {
   var port: Int = _
 
   def createMetadata(author: String, path: String, nombre: String) = {
-    var metadata = new Metadata
+    val metadata = new Metadata
     metadata.autor = author
     metadata.path = path
     metadata.nombre = nombre
@@ -47,7 +46,7 @@ class PlaylistTest extends Specification {
 
   case class UserContext extends Before {
     def before = {
-      var config = getClass.getClassLoader.getResource("configuration.properties")
+      val config = getClass.getClassLoader.getResource("configuration.properties")
       Configuration config config.getPath
       port = Configuration getInt "port"
     }
@@ -62,7 +61,7 @@ class PlaylistTest extends Specification {
 
       //Primero se ira por el camino de no especificar 
       //la duracion de la pista, por eso el "-1"
-      var expected = "#EXTINF:-1,Mago de Oz - Desde mi cielo\n" +
+      val expected = "#EXTINF:-1,Mago de Oz - Desde mi cielo\n" +
         "http://localhost:" + port + "/openmusic/music/song/" + metadata.uuid
 
       result must be equalTo (expected)

@@ -57,7 +57,7 @@ object Node {
    * Crea el servidor netty que permite escuchar en un puerto especificado las peticiones rest
    */
   def netty(port: Int, deployment: ResteasyDeployment): NettyJaxrsServer = {
-    var netty = new NettyJaxrsServer
+    val netty = new NettyJaxrsServer
     netty setPort port
     netty setDeployment deployment
     return netty
@@ -67,15 +67,17 @@ object Node {
    * Genera las clases que devuelven las especificaciones de los servicios rest
    */
   def deployment: ResteasyDeployment = {
-    var deployment = new ResteasyDeployment()
-    var services = List(classOf[SongService], classOf[PlaylistService])
-    var servicesNames = services map { elem => elem.getName }
+    val deployment = new ResteasyDeployment()
+    val services = List(classOf[SongService], classOf[PlaylistService])
+    val servicesNames = services map {
+      elem => elem.getName
+    }
     deployment.setResourceClasses(JavaConverters.asJavaListConverter(servicesNames).asJava)
     return deployment
   }
 
   def configure(args: Array[String]) = {
-    var cli = new CLIParameters
+    val cli = new CLIParameters
     new JCommander(cli, args.toArray: _*)
     logger info cli.folder
     Configuration config cli.folder

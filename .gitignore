@@ -44,3 +44,5 @@ build.log
 #gradle
 .gradle
 bin
+openmusic-node.ipr
+openmusic-node.iws
