@@ -1,5 +1,5 @@
-/*Copyright (c) 2013 -  SideEffectIdeas 
-* 
+/*Copyright (c) 2013 -  SideEffectIdeas
+*
 *	Module: openmusic - metadata
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,42 +13,43 @@
 *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
-*   
+*
 *   Project: http://github.com/SideEffectIdeas/openmusic-node
 *   Wiki: http://github.com/SideEffectIdeas/openmusic-node/wiki
 *   Mailing list: http://groups.google.com/group/sideEffectIdeas
 */
 
-package ar.com.blout.openmusic.node.metadata
+package model.metadata
 
-import java.util.Arrays
-import com.google.common.io.Files
 import java.io.File
-import java.security.MessageDigest
-import java.util.UUID
-import scala.collection.immutable.StringOps
-import ar.com.blout.openmusic.node.configuration.Configuration
-import org.apache.logging.log4j.LogManager
+import play.api.Play
+import play.api.Play.current
+import model.configuration.Configuration
 
 /**
  *
  */
 object MetadataManager {
 
-  var logger = LogManager.getLogger(this.getClass())
 
   def all: List[Metadata] = {
 
-    return new File(Configuration getString "folder")
+    return new File(Configuration.load.getString("openmusic.folder").getOrElse(""))
       .listFiles()
-      .filter({ elem => elem.isFile() })
-      .map({ elem => this createMetadata elem })
+      .filter({
+      elem => elem.isFile()
+    })
+      .map({
+      elem => this createMetadata elem
+    })
       .toList
 
   }
 
   def find(id: Int): Metadata = {
-    return this.all.find { elem => elem.uuid.equals(id) }.get
+    return this.all.find {
+      elem => elem.uuid.equals(id)
+    }.get
   }
 
   def createMetadata(file: File): Metadata = {

@@ -1,6 +1,6 @@
-/*Copyright (c) 2013 -  SideEffectIdeas 
+/*Copyright (c) 2013 -  SideEffectIdeas
 *
-*	Module: openmusic - configuration
+*	Module: openmusic - playlist
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -13,30 +13,21 @@
 *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
-*   
+*
 *   Project: http://github.com/SideEffectIdeas/openmusic-node
 *   Wiki: http://github.com/SideEffectIdeas/openmusic-node/wiki
 *   Mailing list: http://groups.google.com/group/sideEffectIdeas
 */
 
 
-package ar.com.blout.openmusic.node.configuration
+package model.playlist
 
-import org.apache.commons.configuration.PropertiesConfiguration
+trait M3UElement {
 
-/**
- * Wrapper para la configuracion.
- */
-object Configuration {
+  def toM3u = "#EXTINF:" + duration + "," + title + "\n" + url
 
-  var configuration: PropertiesConfiguration = _
-
-  def config(configurationPath: String) = configuration = new PropertiesConfiguration(configurationPath)
-
-  def getInt(option: String): Int = configuration getInt option
-
-  def getString(option: String): String = configuration getString option
-
-
+  def duration: String;
+  def title: String;
+  def url: String;
 
 }

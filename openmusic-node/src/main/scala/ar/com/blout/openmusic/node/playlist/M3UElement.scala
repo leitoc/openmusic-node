@@ -1,6 +1,6 @@
 /*Copyright (c) 2013 -  SideEffectIdeas 
-*
-*	Module: openmusic - configuration
+* 
+*	Module: openmusic - playlist
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -20,23 +20,14 @@
 */
 
 
-package ar.com.blout.openmusic.node.configuration
+package ar.com.blout.openmusic.node.playlist
 
-import org.apache.commons.configuration.PropertiesConfiguration
+trait M3UElement {
 
-/**
- * Wrapper para la configuracion.
- */
-object Configuration {
+  def toM3u = "#EXTINF:" + duration + "," + title + "\n" + url
 
-  var configuration: PropertiesConfiguration = _
-
-  def config(configurationPath: String) = configuration = new PropertiesConfiguration(configurationPath)
-
-  def getInt(option: String): Int = configuration getInt option
-
-  def getString(option: String): String = configuration getString option
-
-
+  def duration: String;
+  def title: String;
+  def url: String;
 
 }

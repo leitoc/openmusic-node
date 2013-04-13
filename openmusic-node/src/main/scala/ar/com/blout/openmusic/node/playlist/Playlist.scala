@@ -1,6 +1,6 @@
 /*Copyright (c) 2013 -  SideEffectIdeas 
 *
-*	Module: openmusic - configuration
+*	Module: openmusic - services
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -19,24 +19,21 @@
 *   Mailing list: http://groups.google.com/group/sideEffectIdeas
 */
 
+package ar.com.blout.openmusic.node.playlist
 
-package ar.com.blout.openmusic.node.configuration
+import ar.com.blout.openmusic.node.metadata.Metadata
+import java.io.File
+import com.google.common.io.Files
+import com.google.common.base.Charsets
 
-import org.apache.commons.configuration.PropertiesConfiguration
+class Playlist extends M3UPlaylist {
 
-/**
- * Wrapper para la configuracion.
- */
-object Configuration {
+  var id: String = _
+  var name: String = _
+  var elements: List[Metadata] = List()
 
-  var configuration: PropertiesConfiguration = _
+  def add(element: Metadata) = elements = elements :+ element
 
-  def config(configurationPath: String) = configuration = new PropertiesConfiguration(configurationPath)
-
-  def getInt(option: String): Int = configuration getInt option
-
-  def getString(option: String): String = configuration getString option
-
-
+  def m3uElements = elements.map({ elem => elem.toM3u })
 
 }

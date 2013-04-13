@@ -1,6 +1,6 @@
-/*Copyright (c) 2013 -  SideEffectIdeas 
-* 
-*	Module: openmusic - playlist
+/*Copyright (c) 2013 -  SideEffectIdeas
+*
+*	Module: openmusic - services
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -13,21 +13,31 @@
 *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
-*   
+*
 *   Project: http://github.com/SideEffectIdeas/openmusic-node
 *   Wiki: http://github.com/SideEffectIdeas/openmusic-node/wiki
 *   Mailing list: http://groups.google.com/group/sideEffectIdeas
 */
 
+package model.playlist
 
-package ar.com.blout.openmusic.node.playlist
+import java.util.Date
 
-trait M3U {
+object PlaylistManager {
 
-  def toM3u = "#EXTINF:" + duration + "," + title + "\n" + url
+  var playlists: List[Playlist] = List()
 
-  def duration: String;
-  def title: String;
-  def url: String;
+  def all = playlists
+
+  def newPlaylist: Playlist = {
+    var playlist = new Playlist
+    this add playlist
+    playlist id = new Date().getTime.toString
+    playlist
+  }
+
+  def add(playlist: Playlist) = playlists = playlists :+ playlist
+
+  def find(id: String) = playlists find { elem => elem.id == id }
 
 }

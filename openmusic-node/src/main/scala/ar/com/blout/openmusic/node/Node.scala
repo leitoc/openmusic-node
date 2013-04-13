@@ -31,6 +31,10 @@ import com.beust.jcommander.JCommander
 import ar.com.blout.openmusic.node.configuration.CLIParameters
 import ar.com.blout.openmusic.node.configuration.CLIParameters
 import ar.com.blout.openmusic.node.configuration.Configuration
+import ar.com.blout.openmusic.node.services.PlaylistService
+import scala.collection.JavaConverters
+import ar.com.blout.openmusic.node.services.SongService
+import ar.com.blout.openmusic.node.services.PlaylistService
 
 object Node {
 
@@ -53,7 +57,7 @@ object Node {
    * Crea el servidor netty que permite escuchar en un puerto especificado las peticiones rest
    */
   def netty(port: Int, deployment: ResteasyDeployment): NettyJaxrsServer = {
-    var netty = new NettyJaxrsServer
+    val netty = new NettyJaxrsServer
     netty setPort port
     netty setDeployment deployment
     return netty
@@ -63,13 +67,17 @@ object Node {
    * Genera las clases que devuelven las especificaciones de los servicios rest
    */
   def deployment: ResteasyDeployment = {
-    var deployment = new ResteasyDeployment()
-    deployment.setResourceClasses(Collections.singletonList(classOf[SongService].getName()))
+    val deployment = new ResteasyDeployment()
+    val services = List(classOf[SongService], classOf[PlaylistService])
+    val servicesNames = services map {
+      elem => elem.getName
+    }
+    deployment.setResourceClasses(JavaConverters.asJavaListConverter(servicesNames).asJava)
     return deployment
   }
 
   def configure(args: Array[String]) = {
-    var cli = new CLIParameters
+    val cli = new CLIParameters
     new JCommander(cli, args.toArray: _*)
     logger info cli.folder
     Configuration config cli.folder
