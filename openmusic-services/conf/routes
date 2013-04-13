@@ -2,11 +2,21 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
-GET     /                           controllers.SongController.index
+# Songs services
+GET     /song                       controllers.SongController.index
 GET     /song/list                  controllers.SongController.list
 GET     /song/:id                   controllers.SongController.retrieve(id: Int)
 GET     /song/:id/metadata          controllers.SongController.metadata(id: Int)
+
+
+
+# Playlist services
+
+GET    /playlist/list                   controllers.PlaylistController.list
+GET    /playlist/new                    controllers.PlaylistController.newPlaylist
+GET    /playlist/:id                    controllers.PlaylistController.playlist(id:String)
+GET    /playlist/:id/metadata           controllers.PlaylistController.metadata(id:String)
+GET    /playlist/:playlist/add/:song    controllers.PlaylistController.add(playlist:String,song:Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
