@@ -22,6 +22,9 @@
 package model.metadata
 
 import java.io.File
+import play.api.Play
+import play.api.Play.current
+import model.configuration.Configuration
 
 /**
  *
@@ -31,16 +34,22 @@ object MetadataManager {
 
   def all: List[Metadata] = {
 
-    return new File("/Users/adrielrubenparedes/Music/chelu")
+    return new File(Configuration.load.getString("openmusic.folder").getOrElse(""))
       .listFiles()
-      .filter({ elem => elem.isFile() })
-      .map({ elem => this createMetadata elem })
+      .filter({
+      elem => elem.isFile()
+    })
+      .map({
+      elem => this createMetadata elem
+    })
       .toList
 
   }
 
   def find(id: Int): Metadata = {
-    return this.all.find { elem => elem.uuid.equals(id) }.get
+    return this.all.find {
+      elem => elem.uuid.equals(id)
+    }.get
   }
 
   def createMetadata(file: File): Metadata = {
