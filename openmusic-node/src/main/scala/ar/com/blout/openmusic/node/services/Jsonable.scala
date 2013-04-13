@@ -1,6 +1,6 @@
 /*Copyright (c) 2013 -  SideEffectIdeas 
 *
-*	Module: openmusic - configuration
+*	Module: openmusic - services
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -19,24 +19,21 @@
 *   Mailing list: http://groups.google.com/group/sideEffectIdeas
 */
 
+package ar.com.blout.openmusic.node.services
 
-package ar.com.blout.openmusic.node.configuration
+import com.google.gson.GsonBuilder
+import java.util.Collection
 
-import org.apache.commons.configuration.PropertiesConfiguration
+import scala.collection.JavaConversions._
+import scala.collection.mutable.ListBuffer
+import java.util.Collection
 
-/**
- * Wrapper para la configuracion.
- */
-object Configuration {
+trait Jsonable {
 
-  var configuration: PropertiesConfiguration = _
+  implicit def ListToJson[T](list: List[T]): String = this.toJson(asJavaCollection(list))
 
-  def config(configurationPath: String) = configuration = new PropertiesConfiguration(configurationPath)
+  implicit def AnythingToJson(obj: Any): String = this toJson obj
 
-  def getInt(option: String): Int = configuration getInt option
-
-  def getString(option: String): String = configuration getString option
-
-
+  def toJson(obj: Any) = new GsonBuilder().setPrettyPrinting().create().toJson(obj)
 
 }

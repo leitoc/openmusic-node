@@ -22,7 +22,7 @@
 
 package ar.com.blout.openmusic.node.playlist
 
-trait M3U {
+trait M3UElement {
 
   def toM3u = "#EXTINF:" + duration + "," + title + "\n" + url
 

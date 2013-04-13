@@ -1,6 +1,6 @@
 /*Copyright (c) 2013 -  SideEffectIdeas 
 *
-*	Module: openmusic - configuration
+*	Module: openmusic - services
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -19,24 +19,25 @@
 *   Mailing list: http://groups.google.com/group/sideEffectIdeas
 */
 
+package ar.com.blout.openmusic.node.playlist
 
-package ar.com.blout.openmusic.node.configuration
+import java.util.Date
 
-import org.apache.commons.configuration.PropertiesConfiguration
+object PlaylistManager {
 
-/**
- * Wrapper para la configuracion.
- */
-object Configuration {
+  var playlists: List[Playlist] = List()
 
-  var configuration: PropertiesConfiguration = _
+  def all = playlists
 
-  def config(configurationPath: String) = configuration = new PropertiesConfiguration(configurationPath)
+  def newPlaylist: Playlist = {
+    var playlist = new Playlist
+    this add playlist
+    playlist id = new Date().getTime.toString
+    playlist
+  }
 
-  def getInt(option: String): Int = configuration getInt option
+  def add(playlist: Playlist) = playlists = playlists :+ playlist
 
-  def getString(option: String): String = configuration getString option
-
-
+  def find(id: String) = playlists find { elem => elem.id == id }
 
 }
