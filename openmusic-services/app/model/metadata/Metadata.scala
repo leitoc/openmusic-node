@@ -41,6 +41,6 @@ class Metadata extends M3UElement {
   // M3U implementation
   def duration = "-1"
   def title = autor + " - " + nombre
-  def url = "http://localhost:" + 9000 + "/openmusic/music/song/" + uuid
+  def url = "http://localhost:" + 9000 + "/song/" + uuid
 
 }

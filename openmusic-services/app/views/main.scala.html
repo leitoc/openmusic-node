@@ -1,15 +1,29 @@
-@(title: String)(content: Html)
-
 <!DOCTYPE html>
 
 <html>
     <head>
-        <title>@title</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <title>OpenMusic</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/handlebars.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/underscore.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/json2.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/backbone.js")" type="text/javascript"></script>
+
     </head>
     <body>
-        @content
+    <h1>Open Music</h1>
+
+    <div id="songs"></div>
+
+
+    <script type="text/x-handlebars-template" id="song-template">
+        <ul id="song-list">
+
+        </ul>
+    </script>
+
+    <script src="@routes.Assets.at("javascripts/app.js")" type="text/javascript"></script>
     </body>
 </html>

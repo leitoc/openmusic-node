@@ -22,8 +22,6 @@
 package model.metadata
 
 import java.io.File
-import play.api.Play
-import play.api.Play.current
 import model.configuration.Configuration
 
 /**
