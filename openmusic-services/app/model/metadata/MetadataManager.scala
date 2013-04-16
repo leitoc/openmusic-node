@@ -43,7 +43,18 @@ object MetadataManager {
       .toList
 
   }
+  
+  def recursiveAll = {
+    val files = new File(Configuration.load.getString("openmusic.folder").getOrElse("")).listFiles()
+    files.flatMap(elem => all(elem)).toList
+  }
 
+  def all(file:File): List[Metadata] = {
+     if (file.isFile()) List(this createMetadata file)
+     else all(file)
+   
+  }
+ 
   def find(id: Int): Metadata = {
     return this.all.find {
       elem => elem.uuid.equals(id)
