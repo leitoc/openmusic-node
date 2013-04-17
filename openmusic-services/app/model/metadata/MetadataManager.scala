@@ -39,7 +39,7 @@ object MetadataManager {
   }
  
   def find(id: Int): Metadata = {
-    return this.recursiveAll.find {
+    return this.all.find {
       elem => elem.uuid.equals(id)
     }.get
   }
@@ -47,6 +47,8 @@ object MetadataManager {
   def createMetadata(file: File): Metadata = {
     var metadata = new Metadata
     metadata.uuid = file.getPath.hashCode
+
+
     metadata.nombre = file.getName()
     metadata.path = file.getAbsolutePath()
     return metadata
