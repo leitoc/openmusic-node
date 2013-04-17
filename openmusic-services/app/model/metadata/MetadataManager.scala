@@ -24,26 +24,20 @@ package model.metadata
 import java.io.File
 import model.configuration.Configuration
 
-/**
- *
- */
+
 object MetadataManager {
 
-
-  def all: List[Metadata] = {
-
-    return new File(Configuration.load.getString("openmusic.folder").getOrElse(""))
-      .listFiles()
-      .filter({
-      elem => elem.isFile()
-    })
-      .map({
-      elem => this createMetadata elem
-    })
-      .toList
-
+  def all = {
+    val files = new File(Configuration.load.getString("openmusic.folder").getOrElse("")).listFiles()
+    files.flatMap(elem => processFile(elem)).toList
   }
 
+  def processFile(file:File): List[Metadata] = {
+     if (file.isFile()) List(this createMetadata file)
+     else { if (file.isDirectory()) file.listFiles().flatMap(e=> processFile(e)).toList else List()}
+   
+  }
+ 
   def find(id: Int): Metadata = {
     return this.all.find {
       elem => elem.uuid.equals(id)
