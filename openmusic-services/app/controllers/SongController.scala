@@ -33,7 +33,7 @@ object SongController extends Controller with Jsonable {
 
   def list = Action {
     Ok {
-      ListToJson(MetadataManager.recursiveAll)
+      ListToJson(MetadataManager.all)
     }
   }
 
