@@ -47,8 +47,6 @@ object MetadataManager {
   def createMetadata(file: File): Metadata = {
     var metadata = new Metadata
     metadata.uuid = file.getPath.hashCode
-
-
     metadata.nombre = file.getName()
     metadata.path = file.getAbsolutePath()
     return metadata
