@@ -21,6 +21,7 @@
 package controllers
 
 import play.api._
+import libs.iteratee.Enumerator
 import play.api.mvc._
 import model.metadata.MetadataManager
 import model.services.Jsonable
@@ -44,9 +45,10 @@ object SongController extends Controller with Jsonable {
   }
 
   def retrieve(id: Int) = Action {
-    Ok.sendFile {
-      MetadataManager.find(id).retrieve
-    }
+    Ok.stream {
+      val file = MetadataManager.find(id).retrieve
+      Enumerator.fromFile(file);
+    }.as("audio/mpeg")
   }
 
 }
