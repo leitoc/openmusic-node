@@ -2,17 +2,19 @@ requirejs.config({
 	
 	paths: {
 		libs:'libs',
-		templates:'../templates'
+		templates:'../templates',
+		jquery:'libs/jquery-1.9.0.min'
 	       },
 	shim: {
-		"handlebars":{
+		"libs/handlebars":{
 			exports: 'Handlebars'
 		},
-		"underscore":{
+		"libs/underscore":{
 			exports: '_'
 		},
-		"backbone":{
-			exports:'Backbone'
+		"libs/backbone":{
+			exports:'Backbone',
+			deps:['libs/underscore']
 		}
 
 	      }
@@ -21,20 +23,15 @@ requirejs.config({
 
 
 
-define([
+require([
 	"libs/underscore",
 	"libs/backbone",
-	"libs/handlebars",
-	"libs/text!templates/title.html"],
+	"views/HomeView"
+	],
 
+	function(_,Backbone,HomeView){
 
-
-
-	function(_,Backbone,Handlebars,titleTemplate){
-
-	console.log(Backbone);
-	console.log(Handlebars);
-	console.log(titleTemplate);	
+	var homeView = new HomeView();
 
 
 });
