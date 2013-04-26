@@ -24,14 +24,15 @@ requirejs.config({
 
 
 require([
-	"libs/underscore",
-	"libs/backbone",
-	"views/HomeView"
+	"views/HomeView",
+	"views/SongsView"
 	],
 
-	function(_,Backbone,HomeView){
+	function(HomeView,SongsView){
 
-	var homeView = new HomeView();
+	new HomeView();
+	new SongsView();
+
 
 
 });
