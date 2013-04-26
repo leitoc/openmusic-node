@@ -21,6 +21,17 @@ define([
 
 		template: Handlebars.compile(songsTemplate),
 
+		events: 
+		{
+			"click tr" : "play"
+		},
+
+		play:function(e){
+			var id = $(e.currentTarget).data("id");
+			window.location.href = "/song/"+id;
+			console.log(id);
+		},
+
 		initialize:function(){
 			this.render();
 		},
