@@ -15,6 +15,9 @@ requirejs.config({
 		"libs/backbone":{
 			exports:'Backbone',
 			deps:['libs/underscore']
+		},
+		"libs/jquery.jplayer":{
+			exports:"jplayer"
 		}
 
 	      }
@@ -25,12 +28,14 @@ requirejs.config({
 
 require([
 	"views/HomeView",
-	"views/SongsView"
+	"views/SongsView",
+	"views/PlayerView"
 	],
 
-	function(HomeView,SongsView){
+	function(HomeView,SongsView,PlayerView){
 
 	new HomeView();
+	new PlayerView();
 	new SongsView();
 
 
