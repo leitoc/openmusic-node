@@ -12,54 +12,57 @@ define([
 	function(_,Backbone,Handlebars,$,Songs,songsTemplate){
 
 
-	var songs = new Songs();
+		var songs = new Songs();
 
 
-	SongsView = Backbone.View.extend({
+		SongsView = Backbone.View.extend({
 
-		el: $('#content'),
+			el: $('#content'),
 
-		template: Handlebars.compile(songsTemplate),
+			template: Handlebars.compile(songsTemplate),
 
-		events: 
-		{
-			"click tr" : "play"
-		},
+			events: 
+			{
+				"click tr" : "play"
+			},
 
-		play:function(e){
-			var id = $(e.currentTarget).data("id");
-			window.location.href = "/song/"+id;
-			console.log(id);
-		},
+			play:function(e){
+				var id = $(e.currentTarget).data("id");
+				window.open(
+					'/song/'+id,
+					'_blank'
+					);
+				console.log(id);
+			},
 
-		initialize:function(){
-			this.render();
-		},
+			initialize:function(){
+				this.render();
+			},
 
-		render:function(){
+			render:function(){
 
-			var me = this;
+				var me = this;
 
-			songs.fetch({
+				songs.fetch({
 
-				success:function(){
+					success:function(){
 
-					var col = _.map(songs.models,function(elem){ return elem.toJSON(); });
-					console.log(col);
-					me.$el.append(me.template({songs: col} ));
+						var col = _.map(songs.models,function(elem){ return elem.toJSON(); });
+						console.log(col);
+						me.$el.append(me.template({songs: col} ));
 
-				}
+					}
 
 
 				});
 
-			
-		}
+
+			}
+
+		});
+
+
+		return SongsView;
+
 
 	});
-
-
-	return SongsView;
-
-
-});
