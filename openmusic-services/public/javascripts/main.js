@@ -35,7 +35,6 @@ require([
 	function(HomeView,SongsView,PlayerView){
 
 	new HomeView();
-	new PlayerView();
 	new SongsView();
 
 
