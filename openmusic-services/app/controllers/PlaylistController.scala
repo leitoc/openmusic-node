@@ -31,7 +31,7 @@ object PlaylistController extends Controller with Jsonable {
 
   def list = Action {
     Ok {
-      ListToJson(PlaylistManager.all)
+      toJson(PlaylistManager.all)
     }
   }
 

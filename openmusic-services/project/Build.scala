@@ -31,7 +31,8 @@ object ApplicationBuild extends Build {
     // Add your project dependencies here,
     jdbc,
     anorm,
-    "com.google.code.gson" % "gson" % "2.2.2"
+    "org.json4s" %% "json4s-native" % "3.2.4",
+    "org.json4s" %% "json4s-jackson" % "3.2.4"
   )
 
 

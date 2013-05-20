@@ -21,16 +21,21 @@
 
 package model.services
 
-
-import scala.collection.JavaConversions._
-import com.google.gson._
+import org.json4s._
+import org.json4s.JsonDSL._
+import org.json4s.native.Serialization
+import org.json4s.native.Serialization.{read, write}
+import org.json4s.jackson.JsonMethods._
+import model.metadata._
+import model.playlist._
 
 trait Jsonable {
-
-  def ListToJson[T](list: List[T]): String = this.toJson(asJavaCollection(list))
-
-  implicit def AnythingToJson(obj: Any): String = this toJson obj
-
-  def toJson(obj: Any) = new GsonBuilder().setPrettyPrinting().create().toJson(obj)
+  
+	/*
+	 * Esto no es feliz :(
+	 */
+	implicit def formats = DefaultFormats + FieldSerializer[Metadata]() + FieldSerializer[Playlist]()
+	
+	def toJson(obj: Object) = (write(obj))
 
 }

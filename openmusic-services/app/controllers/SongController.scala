@@ -27,7 +27,7 @@ import model.metadata.MetadataManager
 import model.services.Jsonable
 import model.utils.SortOrders
 
-object SongController extends Controller with Jsonable with SortOrders{
+object SongController extends Controller with Jsonable with SortOrders {
 
   def index = Action {
     Ok("Your new application is ready.")
@@ -35,7 +35,7 @@ object SongController extends Controller with Jsonable with SortOrders{
 
   def list = Action {
     Ok {
-      ListToJson(MetadataManager.all.sortWith(alphabethicalOrder))
+      toJson(MetadataManager.all.sortWith(alphabethicalOrder))
     }
   }
 
